@@ -1,28 +1,22 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoriaController;
 
 use function Pest\Laravel\patch;
 
 //blog.test/
-Route::get('/', function () {
-    return "Hola, este mensaje aparecerá como entrada a la app";
-});
+Route::get('/', [HomeController::class, 'index']);
 
 //blog.test/categoria
-Route::get('/categoria', function() {
-    return "bienvenido a la categoría";
-});
+Route::get('/categoria', [CategoriaController::class, 'index']);
 
-//blog.test/categoria/#######
-Route::get('/categoria/{subcategoria}', function($subcategoria) {
-    return "aquí verás la subcategoría de {$subcategoria} dentro de la categoría";
-});
+//blog.test/categoria/subcategoria
+Route::get('/categoria/subcategoria', [CategoriaController::class, 'subcategoria']);
 
 //blog.test/######
-Route::get('/{categoría}', function($categoria){
-    return "bienvenido a la categoria de {$categoria}";
-});
+Route::get('/{categoría}', [CategoriaController::class, 'variable']);
 
 //blog.test/######/######
 Route::get('/{categoria}/{subcategoria}', function($categoria, $subcategoria) {
